@@ -5,5 +5,6 @@ document.querySelectorAll("[data-ip]").forEach(b=>b.onclick=async()=>{try{await 
 $("#burger").onclick=()=>$("#menu").classList.toggle("open");
 if($("#status"))fetch("https://api.mcsrvstat.us/3/"+HOST).then(r=>r.json()).then(d=>{
  $("#dot").className=d.online?"on":"off";
- $("#status").textContent=d.online?`Online · ${d.players?.online??0} / ${d.players?.max??0} playing`:"Server offline · back soon"
+ if($("#pl"))$("#pl").textContent=d.players?.online??0;$("#status").textContent=d.online?`Online · ${d.players?.online??0} / ${d.players?.max??0} playing`:"Server offline · back soon"
 }).catch(()=>{$("#status").textContent=IP});
+if($("#dc"))fetch("https://discord.com/api/v9/invites/RsJBu8jEyg?with_counts=true").then(r=>r.json()).then(d=>{$("#dc").textContent=d.approximate_presence_count??"--"}).catch(()=>{$("#dc").textContent="--"});
